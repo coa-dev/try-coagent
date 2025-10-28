@@ -1,2 +1,4 @@
 .volumes
 coagent_demo_storage/
+.ropeproject
+.venv

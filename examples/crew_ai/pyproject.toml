@@ -2,7 +2,7 @@
 name = "crew_ai"
 version = "0.1.0"
 description = "crew-ai using crewAI"
-authors = [{ name = "Your Name", email = "you@example.com" }]
+authors = [{ name = "Leo Borai", email = "esteban@infinyon.com" }]
 requires-python = ">=3.10,<3.14"
 dependencies = [
     "crewai[tools]==1.2.1"

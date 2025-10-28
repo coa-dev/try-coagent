@@ -3,9 +3,8 @@
 1. Fill up the `.env` file with your OpenAI API key.
 
 ```
-MODEL=<model-name>
-ANTHROPIC_API_KEY=<your-anthropic-api-key>
-OPENAI_API_KEY=<your-openai-api-key>
+MODEL=gpt-5-nano
+OPENAI_API_KEY=
 ```
 
 2. Install dependencies
@@ -19,6 +18,12 @@ crewai install
 ```bash
 crewai run
 ```
+
+You should be able to see an output similar to this:
+
+<div align="center">
+    <img src="https://raw.githubusercontent.com/coa-dev/try-coagent/refs/heads/examples/crewai/examples/crew_ai/docs/screen1.png" alt="CrewAI Output Example" width="600"/>
+</div>
 
 ### Pre-Requisites
 
