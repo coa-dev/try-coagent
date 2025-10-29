@@ -1,0 +1,6 @@
+default:
+  just --list
+
+run:
+  docker build --tag 'coa-smolagents' .
+  docker run -p 7860:7860 'coa-smolagents'
