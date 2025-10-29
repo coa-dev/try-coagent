@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from smolagents import CodeAgent, InferenceClientModel, DuckDuckGoSearchTool
+from smolagents import CodeAgent, InferenceClientModel
 from Gradio_UI import GradioUI
 
 load_dotenv()
