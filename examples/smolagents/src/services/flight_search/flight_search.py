@@ -8,7 +8,7 @@ class FlightSearchService:
     """
 
     def __init__(self):
-        self.csv_file_path = "../../../data/flight_dataset.csv"
+        self.csv_file_path = "data/flight_dataset.csv"
         self.data = None
         self._load_data()
 
@@ -46,7 +46,7 @@ class FlightSearchService:
             dest_mask = self.data['Destination'] == destination
 
         result = self.data[source_mask & dest_mask]
-        return result
+        return result.to_dict('records')
 
     def find_by_source(self, source: str, case_sensitive: bool = False) -> pd.DataFrame:
         """
@@ -67,7 +67,7 @@ class FlightSearchService:
         else:
             mask = self.data['Source'] == source
 
-        return self.data[mask]
+        return self.data[mask].to_dict('records')
 
     def find_by_destination(self, destination: str, case_sensitive: bool = False) -> pd.DataFrame:
         """
@@ -88,7 +88,7 @@ class FlightSearchService:
         else:
             mask = self.data['Destination'] == destination
 
-        return self.data[mask]
+        return self.data[mask].to_dict('records')
 
     def get_cheapest_route(self, source: str, destination: str,
                           case_sensitive: bool = False) -> Optional[pd.Series]:
@@ -109,7 +109,7 @@ class FlightSearchService:
             return None
 
         cheapest_idx = routes['Price'].idxmin()
-        return routes.loc[cheapest_idx]
+        return routes.loc[cheapest_idx].to_dict('records')
 
     def get_all_routes(self) -> List[tuple]:
         """
@@ -190,7 +190,7 @@ class FlightSearchService:
         if max_stops is not None:
             result = result[result['Total_Stops'] <= max_stops]
 
-        return result
+        return result.to_dict('records')
 
     def get_statistics(self) -> Dict:
         """

@@ -1,3 +1,8 @@
+In Smolagents, `step_callbacks` are functions that can be defined to execute
+specific actions or logging at each step of an agent's process. This feature
+allows developers to monitor the agent's progress and manage its behavior
+during execution.
+
 ## Development
 
 ### Setup
@@ -9,3 +14,5 @@
 ## Datasets
 
 - Flights Dataset borrowed from https://www.kaggle.com/datasets/viveksharmar/flight-price-data
+
+> Some data is synthesized for demonstration purposes.

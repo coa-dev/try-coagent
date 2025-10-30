@@ -10682,3 +10682,191 @@ Air India,Kolkata,Banglore,0,4145,27,4,2019,20,45,23,20,2,35
 Jet Airways,Banglore,Delhi,0,7229,27,4,2019,8,20,11,20,3,0
 Vistara,Banglore,New Delhi,0,12648,1,3,2019,11,30,14,10,2,40
 Air India,Delhi,Cochin,2,11753,9,5,2019,10,55,19,15,8,20
+Delta,New York,Los Angeles,0,250,15,11,2025,14,30,17,50,6,20
+American Airlines,Chicago,Houston,1,320,20,11,2025,9,0,11,15,3,15
+Southwest,San Francisco,Las Vegas,0,90,22,11,2025,12,0,12,45,1,45
+JetBlue,Miami,Atlanta,1,150,10,11,2025,4,20,6,10,1,50
+United,Newark,Seattle,2,450,25,11,2025,14,50,21,30,8,40
+Alaska Airlines,Denver,San Diego,1,200,29,11,2025,9,30,12,15,2,45
+Spirit Airlines,Orlando,New York,0,75,1,12,2025,18,0,20,15,2,15
+Allegiant,New Orleans,Los Angeles,2,180,5,12,2025,10,15,13,30,3,15
+Frontier,Las Vegas,Chicago,0,85,15,12,2025,7,45,13,0,5,15
+Sun Country,Minnesota,San Diego,1,295,8,12,2025,11,0,14,50,5,50
+Delta,New York,Los Angeles,0,250,15,11,2025,14,30,17,50,6,20
+American Airlines,Chicago,Houston,1,320,20,11,2025,9,0,11,15,3,15
+Southwest,San Francisco,Las Vegas,0,90,22,11,2025,12,0,12,45,1,45
+JetBlue,Miami,Atlanta,1,150,10,11,2025,4,20,6,10,1,50
+United,Newark,Seattle,2,450,25,11,2025,14,50,21,30,8,40
+Alaska Airlines,Denver,San Diego,1,200,29,11,2025,9,30,12,15,2,45
+Spirit Airlines,Orlando,New York,0,75,1,12,2025,18,0,20,15,2,15
+Allegiant,New Orleans,Los Angeles,2,180,5,12,2025,10,15,13,30,3,15
+Frontier,Las Vegas,Chicago,0,85,15,12,2025,7,45,13,0,5,15
+Sun Country,Minnesota,San Diego,1,295,8,12,2025,11,0,14,50,5,50
+Alaska Airlines,Phoenix,Denver,1,180,15,12,2025,16,20,18,30,2,10
+American Airlines,Orlando,Atlanta,0,120,20,12,2025,8,0,9,50,1,50
+Southwest,Los Angeles,Seattle,1,220,10,12,2025,10,30,13,15,2,45
+Delta,Boston,San Francisco,2,440,28,12,2025,6,40,10,20,5,40
+JetBlue,Philadelphia,Miami,0,145,5,1,2026,10,15,13,5,2,50
+United,Dallas,Ft Lauderdale,1,230,12,1,2026,14,10,17,50,3,40
+Spirit Airlines,Cleveland,Chicago,0,50,15,1,2026,12,30,12,45,0,15
+Allegiant,Newark,Phoenix,1,270,18,1,2026,9,45,12,15,2,30
+Frontier,San Diego,New York,2,160,22,1,2026,7,15,13,30,5,15
+Delta,Miami,Las Vegas,0,320,29,1,2026,14,0,17,10,3,10
+Southwest,Louisville,Denver,1,110,25,1,2026,10,40,13,25,2,45
+American Airlines,Atlanta,Miami,0,85,22,1,2026,5,0,7,30,2,30
+JetBlue,Washington,Seattle,1,300,1,2,2026,11,10,14,45,4,35
+United,Chicago,San Francisco,0,510,19,2,2026,19,20,22,0,4,40
+Allegiant,Nashville,Houston,2,75,3,2,2026,8,30,11,15,2,45
+Spirit Airlines,Detroit,Phoenix,0,90,5,2,2026,16,0,18,0,2,0
+Delta,Phoenix,Los Angeles,1,210,8,2,2026,14,30,16,50,2,20
+American Airlines,San Jose,Newark,1,285,12,2,2026,13,15,16,15,2,15
+Southwest,San Francisco,Las Vegas,0,95,15,2,2026,11,30,12,10,0,40
+JetBlue,Miami,Boston,2,350,22,2,2026,5,50,9,30,3,40
+Ryanair,Dublin,London,1,55,15,11,2025,11,30,12,50,1,20
+EasyJet,Paris,Berlin,0,80,20,11,2025,9,0,10,15,1,15
+Lufthansa,Frankfurt,Munich,0,150,5,11,2025,14,20,15,45,1,25
+British Airways,London,Amsterdam,1,120,22,11,2025,7,45,10,0,1,15
+KLM,Amsterdam,Barcelona,1,200,29,11,2025,18,10,20,30,1,20
+Air France,Paris,Rome,2,220,1,12,2025,5,55,8,20,2,25
+Iberia,Madrid,Seville,0,60,12,12,2025,15,30,16,30,1,0
+Aer Lingus,Dublin,Belfast,1,75,6,12,2025,10,0,11,10,1,10
+Brussels Airlines,Brussels,Lisbon,2,190,19,12,2025,13,40,16,15,2,35
+Norwegian,Oslo,Copenhagen,0,85,10,12,2025,9,15,10,15,1,0
+Vueling,Barcelona,Milan,1,95,2,1,2026,16,20,19,5,2,45
+Ryanair,London,Edinburgh,0,50,10,1,2026,17,0,18,30,1,30
+British Airways,Manchester,Dublin,1,110,24,1,2026,14,20,16,45,2,25
+KLM,Amsterdam,Vienna,2,240,1,2,2026,5,30,8,0,2,30
+Air France,Marseille,Nice,0,70,8,2,2026,12,0,12,30,0,30
+Lufthansa,Berlin,Stockholm,1,130,14,2,2026,15,25,20,0,4,35
+EasyJet,Zurich,Basel,0,40,18,2,2026,8,0,9,15,1,15
+Norwegian,Oslo,Riga,1,90,22,2,2026,16,10,18,20,2,10
+Vueling,Barcelona,Madrid,0,55,15,3,2026,11,15,12,30,1,15
+Brussels Airlines,Luxembourg,Amsterdam,1,120,28,3,2026,9,0,10,30,1,30
+Iberia,Valencia,Malaga,0,75,4,3,2026,14,10,15,5,0,55
+Vueling,Seville,Milan,0,100,9,3,2026,10,20,12,0,1,40
+Air France,Nice,Geneva,1,99,3,4,2026,19,45,20,15,1,30
+Lufthansa,Hamburg,Copenhagen,2,210,18,4,2026,10,30,12,15,1,45
+Ryanair,Dublin,Glasgow,0,40,22,4,2026,12,0,13,10,1,10
+EasyJet,Lisbon,Oporto,0,45,30,4,2026,18,15,19,0,0,45
+Norwegian,Copenhagen,Reykjavik,1,150,1,5,2026,9,30,11,0,1,30
+KLM,Amsterdam,Düsseldorf,0,85,5,5,2026,8,0,9,45,1,45
+Brussels Airlines,Ghent,Berlin,1,110,14,5,2026,20,20,23,10,2,50
+Iberia,Madrid,Barcelona,0,95,7,5,2026,15,45,16,15,0,30
+Ryanair,Dublin,Liverpool,0,45,15,5,2026,10,30,11,15,0,45
+Vueling,Barcelona,Brussels,1,85,1,5,2026,14,10,16,0,1,50
+Iberia,Madrid,Paris,0,120,10,5,2026,17,0,19,30,2,30
+Air France,Nice,Toulouse,0,75,18,5,2026,12,20,13,40,1,20
+KLM,Amsterdam,Munich,1,150,5,6,2026,6,0,8,30,2,30
+British Airways,London,Cardiff,1,90,22,6,2026,12,15,14,0,1,45
+Lufthansa,Berlin,Munich,0,130,8,6,2026,15,20,16,0,0,40
+EasyJet,London,Glasgow,1,65,3,6,2026,18,30,20,0,1,30
+Norwegian,Oslo,Bergen,0,100,24,6,2026,11,30,12,50,1,20
+Ryanair,Edinburgh,Belfast,1,70,30,6,2026,8,0,9,15,1,15
+Air France,Strasbourg,Lyon,0,60,12,7,2026,10,50,12,15,1,25
+Ryanair,Warsaw,Prague,1,45,16,7,2026,14,30,16,0,1,30
+Lufthansa,Frankfurt,Zurich,0,100,2,7,2026,12,0,13,10,1,10
+KLM,Amsterdam,Hamburg,1,110,20,7,2026,9,0,10,45,1,45
+Vueling,Barcelona,Catania,2,180,2,8,2026,19,15,21,0,1,45
+EasyJet,London,Birmingham,0,40,22,8,2026,15,0,16,20,1,20
+Iberia,Valencia,Bilbao,1,75,1,8,2026,17,30,19,45,2,15
+British Airways,Edinburgh,Liverpool,1,90,14,8,2026,8,30,10,0,1,30
+Norwegian,Helsinki,Oslo,0,70,10,9,2026,13,30,14,0,0,30
+KLM,Amsterdam,Krakow,2,130,24,9,2026,19,50,22,10,2,20
+Air France,Clermont-Ferrand,Nice,0,65,30,9,2026,12,0,13,20,1,20
+Lufthansa,Saarbrücken,Munich,0,90,9,10,2026,5,30,6,50,0,20
+EasyJet,London,Bordeaux,1,130,18,10,2026,11,40,13,0,1,20
+Iberia,Madrid,Granada,0,110,7,10,2026,20,30,22,15,1,45
+Ryanair,Dublin,Manchester,0,50,15,10,2026,7,15,8,0,0,45
+Vueling,Barcelona,Palma,1,120,30,10,2026,18,0,19,30,1,30
+Norwegian,Oslo,Stockholm,0,80,4,11,2026,13,15,14,30,1,15
+KLM,Amsterdam,Frankfurt,0,150,19,11,2026,12,25,14,0,1,35
+British Airways,London,Nottingham,1,85,20,11,2026,11,5,12,30,1,25
+Air France,Paris,Brest,1,75,8,11,2026,9,0,11,15,2,15
+LATAM Airlines,Santiago,Buenos Aires,1,150,15,5,2026,10,30,12,50,2,20
+Avianca,Bogotá,Lima,0,95,20,5,2026,8,0,10,15,2,15
+GOL,Rio de Janeiro,São Paulo,0,45,10,5,2026,14,20,15,0,0,40
+Avianca,Cartagena,Manaus,2,220,5,6,2026,18,15,23,45,5,30
+LATAM Airlines,Santiago,Medellín,1,165,1,6,2026,12,50,15,30,2,40
+Viva Air,Medellín,Cali,0,50,22,6,2026,16,10,18,0,1,50
+GOL,Rio de Janeiro,Salvador,1,110,24,6,2026,5,30,7,40,2,10
+Avianca,Lima,Quito,0,70,11,6,2026,10,20,11,40,1,20
+LATAM Airlines,Asunción,Buenos Aires,1,100,30,6,2026,19,15,21,0,1,45
+Sky Airline,Santiago,Iguazú,0,180,15,7,2026,14,0,16,30,2,30
+Avianca,Bogotá,Cali,1,90,20,7,2026,11,0,12,30,1,30
+GOL,Brasília,Fortaleza,0,130,1,7,2026,15,25,17,45,2,20
+LATAM Airlines,São Paulo,Natal,1,180,12,7,2026,5,45,8,15,2,30
+Viva Air,Lima,Trujillo,0,40,8,8,2026,12,15,13,30,1,15
+Sky Airline,Santiago,Valparaíso,0,45,14,8,2026,17,30,18,10,0,40
+Avianca,Quito,Auckland,2,360,16,8,2026,20,30,11,15,4,45
+GOL,Recife,São Paulo,1,120,29,8,2026,12,0,15,0,3,0
+LATAM Airlines,Rio de Janeiro,Salvador,0,55,22,8,2026,8,30,10,15,1,45
+Avianca,Medellín,Cartagena,0,75,30,9,2026,10,30,12,15,1,45
+GOL,Porto Alegre,São Paulo,1,130,4,9,2026,6,0,8,20,2,20
+LATAM Airlines,La Paz,Santiago,1,200,29,9,2026,14,15,17,30,2,30
+Viva Air,Cali,Cartagena,0,50,6,10,2026,20,20,22,15,1,55
+Sky Airline,Iquique,Santiago,0,70,8,10,2026,15,0,16,10,1,10
+Avianca,Buenos Aires,Montevideo,0,45,20,10,2026,9,15,10,0,0,45
+GOL,Foz do Iguaçu,Cuiabá,1,99,22,10,2026,18,20,20,30,2,10
+LATAM Airlines,Assunção,Rio de Janeiro,1,150,14,11,2026,16,0,18,15,2,15
+Viva Air,Bogotá,Cartagena,0,70,15,11,2026,13,25,14,50,1,25
+GOL,Campinas,Rio de Janeiro,0,85,24,11,2026,11,15,13,0,1,45
+LATAM Airlines,Lima,Bogotá,0,90,5,12,2026,9,15,11,0,1,45
+Avianca,Cartagena,Bogotá,0,50,8,12,2026,14,30,15,10,0,40
+GOL,Recife,São Paulo,1,110,12,12,2026,15,0,17,0,2,0
+Sky Airline,Santiago,Antofagasta,0,100,17,12,2026,11,30,12,45,1,15
+Avianca,Medellín,Manizales,0,45,4,1,2027,7,15,8,0,0,45
+LATAM Airlines,Sao Paulo,Fortaleza,1,150,15,1,2027,19,20,22,0,2,40
+GOL,Santo Domingo,Cali,1,160,9,1,2027,12,35,15,10,2,35
+Avianca,Lima,La Paz,0,120,30,1,2027,10,0,11,40,1,40
+LATAM Airlines,Rio de Janeiro,Belo Horizonte,0,80,16,2,2027,18,50,20,10,1,20
+GOL,São Paulo,Porto Alegre,1,90,11,2,2027,9,15,11,0,1,45
+Sky Airline,Valparaíso,Santiago,0,70,23,2,2027,14,20,16,10,1,50
+Avianca,Bogotá,Lima,0,130,26,2,2027,17,45,19,20,1,35
+LATAM Airlines,Cuzco,Lima,1,160,5,3,2027,6,30,8,40,1,10
+GOL,Fortaleza,Recife,0,75,21,3,2027,12,0,13,40,1,40
+Avianca,Panama City,Lima,1,95,15,3,2027,19,0,21,10,2,10
+LATAM Airlines,Santiago,Valdivia,0,150,11,3,2027,10,15,12,20,2,5
+Sky Airline,Cali,Bogotá,0,60,6,4,2027,14,0,15,30,1,30
+Avianca,Manaus,Rio de Janeiro,1,210,20,4,2027,17,30,20,15,2,45
+GOL,Bahia,Salvador,0,95,23,4,2027,8,0,9,30,1,30
+LATAM Airlines,Buenos Aires,La Paz,1,140,9,5,2027,6,10,8,50,1,40
+GOL,Santiago,Asunción,0,80,21,5,2027,9,0,10,30,1,30
+Avianca,El Salvador,Bogotá,0,100,10,5,2027,12,0,13,0,1,0
+LATAM Airlines,Lima,Wellington,1,300,20,5,2027,19,25,23,0,3,35
+GOL,Curitiba,Rio de Janeiro,1,120,25,6,2027,14,20,15,10,0,50
+Sky Airline,Talca,Concepción,0,60,3,6,2027,16,10,17,25,1,15
+Avianca,Bogotá,Medellín,1,50,28,6,2027,18,30,19,45,1,15
+LATAM Airlines,Cali,Santiago,2,200,4,6,2027,8,10,10,30,1,30
+GOL,Foz do Iguaçu,Cuiabá,0,90,15,7,2027,12,15,13,30,1,15
+Sky Airline,La Serena,Calama,1,110,17,7,2027,14,0,15,30,1,30
+LATAM Airlines,Lima,Bogotá,0,90,15,5,2026,9,15,11,0,1,45
+Avianca,Bogotá,Lima,0,85,15,5,2026,11,30,13,15,1,45
+LATAM Airlines,Lima,Bogotá,1,95,10,6,2026,14,0,16,15,1,15
+Avianca,Bogotá,Lima,1,100,20,6,2026,8,45,10,30,1,45
+Avianca,Quito,Caracas,1,150,20,7,2026,13,0,15,15,1,15
+LATAM Airlines,Caracas,Quito,1,145,25,7,2026,9,20,11,45,2,25
+LATAM Airlines,Rio de Janeiro,São Paulo,0,65,15,8,2026,8,30,10,0,1,30
+GOL,Rio de Janeiro,São Paulo,0,60,18,8,2026,17,0,18,30,1,30
+Avianca,Rio de Janeiro,São Paulo,1,75,20,9,2026,14,10,16,45,2,35
+LATAM Airlines,Santiago,Rio de Janeiro,1,170,2,9,2026,12,0,14,15,2,15
+GOL,São Paulo,Rio de Janeiro,0,55,21,10,2026,9,30,11,0,1,30
+LATAM Airlines,Lima,Bogotá,0,90,15,5,2026,9,15,11,0,1,45
+Avianca,Bogotá,Lima,0,85,15,5,2026,11,30,13,15,1,45
+LATAM Airlines,Lima,Bogotá,1,95,10,6,2026,14,0,16,15,1,15
+Avianca,Bogotá,Lima,1,100,20,6,2026,8,45,10,30,1,45
+Avianca,Quito,Caracas,1,150,20,7,2026,13,0,15,15,1,15
+LATAM Airlines,Caracas,Quito,1,145,25,7,2026,9,20,11,45,2,25
+LATAM Airlines,Rio de Janeiro,São Paulo,0,65,15,8,2026,8,30,10,0,1,30
+GOL,Rio de Janeiro,São Paulo,0,60,18,8,2026,17,0,18,30,1,30
+Avianca,Rio de Janeiro,São Paulo,1,75,20,9,2026,14,10,16,45,2,35
+LATAM Airlines,Santiago,Rio de Janeiro,1,170,2,9,2026,12,0,14,15,2,15
+GOL,São Paulo,Rio de Janeiro,0,55,21,10,2026,9,30,11,0,1,30
+LATAM Airlines,Lima,Bogotá,1,125,15,10,2026,16,0,18,0,1,30
+Avianca,Bogotá,Lima,1,115,24,10,2026,11,0,13,45,2,45
+LATAM Airlines,Quito,Caracas,0,100,3,11,2026,10,15,11,50,1,35
+GOL,Rio de Janeiro,São Paulo,1,70,8,11,2026,14,15,16,0,1,45
+Avianca,Quito,Lima,0,90,12,11,2026,12,30,13,45,1,15
+LATAM Airlines,Caracas,Quito,0,85,20,12,2026,9,20,11,10,1,50
+Avianca,Quito,Caracas,0,150,28,12,2026,8,0,10,20,1,20
+LATAM Airlines,São Paulo,Rio de Janeiro,0,60,30,12,2026,17,0,18,30,1,30
+GOL,Rio de Janeiro,São Paulo,1,75,5,1,2027,16,30,18,15,1,45

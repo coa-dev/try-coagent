@@ -3,9 +3,9 @@ from smolagents.tools import Tool
 from services.flight_search.flight_search import FlightSearchService
 
 class FlightSearchTool(Tool):
-    name = "Flight Search"
+    name = "flight_search"
     description = "Search for flights between two locations on a specific date."
-    inputs = inputs = {
+    inputs = {
         'source': {
             'type': 'string',
             'description': "The name or code of the source airport or city.",
@@ -16,32 +16,54 @@ class FlightSearchTool(Tool):
             'description': "The name or code of the destination airport or city.",
             'optional': True,
         },
-        'airline': {
-            'type': 'string',
-            'description': "The name of the airline to filter by.",
-            'optional': True,
-        },
-        'max_price': {
-            'type': 'number',
-            'description': "The maximum price limit for flights.",
-            'optional': True,
-        },
-        'max_stops': {
-            'type': 'number',
-            'description': "The maximum number of stops allowed for flights.",
-            'optional': True,
-        },
-        'case_sensitive': {
-            'type': 'boolean',
-            'description': "Whether to perform case-sensitive matching for text fields.",
-            'optional': True,
-            'default': False,
-        },
     }
+    output_type = 'string'
 
-    output_type = "string"
+    def __init__(self, **kwargs):
+        super().__init__()
 
-    def search_flights(self, origin, destination, departure_date, adults, children=0, infants=0):
+    def forward(self, source: str, destination: str) -> str:
         fss = FlightSearchService()
-        flights = fss.search_with_filters()
+        flights = fss.find_by_route(source, destination)
+
+        if len(flights) == 0:
+            flights = [
+                {
+                    "Airline": "Mock Airline",
+                    "FlightNumber": "MA123",
+                    "Source": source,
+                    "Destination": destination,
+                    "DepartureTime": "2024-07-01T10:00:00",
+                    "ArrivalTime": "2024-07-01T12:00:00",
+                    "Price": 199.99
+                },
+                {
+                    "Airline": "Sample Air",
+                    "FlightNumber": "SA456",
+                    "Source": source,
+                    "Destination": destination,
+                    "DepartureTime": "2024-07-01T15:00:00",
+                    "ArrivalTime": "2024-07-01T17:00:00",
+                    "Price": 249.99
+                },
+                {
+                    "Airline": "Test Flights",
+                    "FlightNumber": "TF789",
+                    "Source": source,
+                    "Destination": destination,
+                    "DepartureTime": "2024-07-01T18:00:00",
+                    "ArrivalTime": "2024-07-01T20:00:00",
+                    "Price": 179.99
+                },
+                {
+                    "Airline": "Demo Airways",
+                    "FlightNumber": "DA101",
+                    "Source": source,
+                    "Destination": destination,
+                    "DepartureTime": "2024-07-01T20:00:00",
+                    "ArrivalTime": "2024-07-01T22:00:00",
+                    "Price": 229.99
+                }
+            ]
+
         return flights
