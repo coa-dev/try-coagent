@@ -1,7 +1,11 @@
 import os
 
+from datetime import datetime
+
+from coa_dev_coagent import CoagentClient
 from dotenv import load_dotenv
-from smolagents import CodeAgent, OpenAIModel
+from smolagents import CodeAgent, OpenAIModel, MemoryStep, MultiStepAgent, ActionStep
+from smolagents.memory import FinalAnswerStep, PlanningStep, SystemPromptStep, TaskStep
 from Gradio_UI import GradioUI
 
 from tools.flight_search import FlightSearchTool
@@ -12,19 +16,55 @@ load_dotenv()
 llm_model = os.environ.get("LLM_MODEL")
 llm_api_key = os.environ.get("LLM_API_KEY")
 llm_api_base = os.environ.get("LLM_API_BASE")
+session_id = os.environ.get("SESSION_ID", f'smolagents-{datetime.now().astimezone().isoformat()}')
+prompt_number = 1
+turn_number = 1
+
+if not llm_model or not llm_api_key:
+    raise ValueError("LLM_MODEL and LLM_API_KEY must be set in the environment variables.")
+
+client = CoagentClient()
 
 # Callbacks used to log CoAgent
-def logging_step_callback(*args, **kwargs):
-    print(f"Logging Step: {args} -- {kwargs}")
+def logging_step_callback(
+    step: MemoryStep,
+    agent: MultiStepAgent
+):
+    match step:
+        case ActionStep():
+            try:
+                if step.model_output:
+                    client.log_llm_response(
+                        session_id=session_id,
+                        response=step.model_output,
+                        prompt_number=prompt_number,
+                        turn_number=turn_number,
+                        total_tokens=step.token_usage.total_tokens,
+                        input_tokens=step.token_usage.input_tokens,
+                        output_tokens=step.token_usage.output_tokens,
+                    )
+            except Exception as e:
+                print(f"Failed to log action step: {e}")
+            return
+        case PlanningStep():
+            return
+        case TaskStep():
+            return
+        case SystemPromptStep():
+            return
+        case FinalAnswerStep():
+            return
+        case _:
+            print(f"[{agent.name}] {step}")
 
-def final_answer_checks(*args, **kwargs):
-    print(f"Final Answer: {args} -- {kwargs}")
+# def final_answer_checks(*args, **kwargs):
+#     print(f"Final Answer: {args} -- {kwargs}")
 
-def success_callback(*args, **kwargs):
-    print(f"Success CB: {args} -- {kwargs}")
+# def success_callback(*args, **kwargs):
+#     print(f"Success CB: {args} -- {kwargs}")
 
-def failure_callback(*args, **kwargs):
-    print(f"Failure CB: {args} -- {kwargs}")
+# def failure_callback(*args, **kwargs):
+#     print(f"Failure CB: {args} -- {kwargs}")
 
 model = OpenAIModel(
     model_id=llm_model,
@@ -41,9 +81,6 @@ transportation_agent = CodeAgent(
     ],
     step_callbacks=[
         logging_step_callback,
-        success_callback,
-        failure_callback,
-        final_answer_checks,
     ],
 )
 
@@ -63,10 +100,17 @@ agent = CodeAgent(
     ],
     step_callbacks=[
         logging_step_callback,
-        success_callback,
-        failure_callback,
-        final_answer_checks,
     ],
 )
+
+try:
+    client.log_session_start(
+        session_id=session_id,
+        prompt="",
+        prompt_number=prompt_number,
+        turn_number=turn_number,
+    )
+except Exception as e:
+    print(f"Failed to log session start: {e}")
 
 GradioUI(agent).launch(server_name="0.0.0.0")
