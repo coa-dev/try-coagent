@@ -11,6 +11,7 @@ load_dotenv()
 
 llm_model = os.environ.get("LLM_MODEL")
 llm_api_key = os.environ.get("LLM_API_KEY")
+llm_api_base = os.environ.get("LLM_API_BASE")
 
 # Callbacks used to log CoAgent
 def logging_step_callback(*args, **kwargs):
@@ -28,6 +29,7 @@ def failure_callback(*args, **kwargs):
 model = OpenAIModel(
     model_id=llm_model,
     api_key=llm_api_key,
+    api_base=llm_api_base
 )
 
 transportation_agent = CodeAgent(

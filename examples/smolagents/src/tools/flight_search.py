@@ -4,7 +4,7 @@ from services.flight_search.flight_search import FlightSearchService
 
 class FlightSearchTool(Tool):
     name = "flight_search"
-    description = "Search for flights between two locations on a specific date."
+    description = "Search for flights between two locations"
     inputs = {
         'source': {
             'type': 'string',
