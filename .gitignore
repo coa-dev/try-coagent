@@ -4,3 +4,4 @@ coagent_demo_storage/
 .venv
 .ropeproject
 __pycache__/
+.DS_Store
