@@ -1,23 +1,21 @@
 import os
 
-from datetime import datetime
-
-from coa_dev_coagent import CoagentClient
 from dotenv import load_dotenv
 from smolagents import CodeAgent, OpenAIModel, MemoryStep, MultiStepAgent, ActionStep
 from Gradio_UI import GradioUI
 
+from coa_dev_coagent import CoagentClient
+
 from tools.flight_search import FlightSearchTool
 from tools.final_answer import FinalAnswerTool
+
+from counters import get_session_id, get_prompt_number, get_turn_number
 
 load_dotenv()
 
 llm_model = os.environ.get("LLM_MODEL")
 llm_api_key = os.environ.get("LLM_API_KEY")
 llm_api_base = os.environ.get("LLM_API_BASE")
-session_id = os.environ.get("SESSION_ID", f'smolagents-{datetime.now().astimezone().isoformat()}')
-prompt_number = 1
-turn_number = 1
 
 if not llm_model or not llm_api_key:
     raise ValueError("LLM_MODEL and LLM_API_KEY must be set in the environment variables.")
@@ -34,10 +32,10 @@ def logging_step_callback(
             try:
                 if step.model_output:
                     client.log_llm_response(
-                        session_id=session_id,
+                        session_id=get_session_id(),
                         response=step.model_output,
-                        prompt_number=prompt_number,
-                        turn_number=turn_number,
+                        prompt_number=get_prompt_number(True),
+                        turn_number=get_turn_number(True),
                         total_tokens=step.token_usage.total_tokens,
                         input_tokens=step.token_usage.input_tokens,
                         output_tokens=step.token_usage.output_tokens,
@@ -84,15 +82,5 @@ agent = CodeAgent(
         logging_step_callback,
     ],
 )
-
-try:
-    client.log_session_start(
-        session_id=session_id,
-        prompt="",
-        prompt_number=prompt_number,
-        turn_number=turn_number,
-    )
-except Exception as e:
-    print(f"Failed to log session start: {e}")
 
 GradioUI(agent).launch(server_name="0.0.0.0")

@@ -27,6 +27,7 @@ from smolagents.agents import ActionStep, MultiStepAgent
 from smolagents.memory import MemoryStep
 from smolagents.utils import _is_package_available
 
+from counters import get_session_id, get_prompt_number, get_turn_number
 
 def pull_messages_from_step(
     step_log: MemoryStep,
@@ -253,11 +254,22 @@ class GradioUI:
 
     def log_user_message(self, text_input, file_uploads_log):
         try:
-            run_id = f'smolagents-run-{datetime.now().astimezone().isoformat()}'
-            self.coa.log_run_start(
-                run_id=run_id,
-                prompt=text_input,
-            )
+            prompt_number = get_prompt_number(True)
+            turn_number = get_turn_number(True)
+
+            if prompt_number == 1 and turn_number == 1:
+                self.coa.log_session_start(
+                    session_id=get_session_id(),
+                    prompt=text_input,
+                    prompt_number=prompt_number,
+                    turn_number=turn_number,
+                )
+            else:
+                run_id = f'smolagents-run-{datetime.now().astimezone().isoformat()}'
+                self.coa.log_run_start(
+                    run_id=run_id,
+                    prompt=text_input,
+                )
         except Exception:
             pass  # Ignore if CoagentClient is not properly initialized
 
