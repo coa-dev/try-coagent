@@ -30,6 +30,14 @@ def logging_step_callback(
     match step:
         case ActionStep():
             try:
+                if step.error is not None:
+                    client.log_error(
+                        session_id=get_session_id(),
+                        prompt_number=get_prompt_number(True),
+                        turn_number=get_turn_number(True),
+                        error_message=str(step.error),
+                    )
+
                 if step.model_output:
                     client.log_llm_response(
                         session_id=get_session_id(),
@@ -39,6 +47,13 @@ def logging_step_callback(
                         total_tokens=step.token_usage.total_tokens,
                         input_tokens=step.token_usage.input_tokens,
                         output_tokens=step.token_usage.output_tokens,
+                    )
+
+                if step.is_final_answer:
+                    client.log_run_end(
+                        run_id=f'run-{get_session_id()}',
+                        response=step.model_output,
+                        elapsed_msec=step.timing.duration(),
                     )
             except Exception as e:
                 print(f"Failed to log action step: {e}")

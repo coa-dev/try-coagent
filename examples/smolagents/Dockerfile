@@ -10,7 +10,6 @@ RUN uv pip install --system -r requirements.txt
 
 COPY ./data /app/data
 COPY ./src /app/src
-COPY ./prompts.yaml /app/
 COPY ./.env /app/.env
 
 EXPOSE 7860

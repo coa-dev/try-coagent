@@ -4,9 +4,10 @@ from datetime import datetime
 
 prompt_number = 1
 turn_number = 1
+session_date = datetime.now().astimezone().isoformat()
 
 def get_session_id():
-    return os.environ.get("SESSION_ID", f'smolagents-{datetime.now().astimezone().isoformat()}')
+    return os.environ.get("SESSION_ID", f'smolagents-{session_date}')
 
 def get_prompt_number(add: bool = False):
     global prompt_number

@@ -28,6 +28,10 @@ docker run --network host 'coa-smolagents'
 
 ## Development
 
+<div align="center">
+  <img src="./docs/screen.png" alt="Smolagents Reporting to CoAgent" width="200"/>
+</div>
+
 ### Setup
 
 - Copy the `.env.example` into `.env` and pass a Read Only Access HuggingFace Token
