@@ -3,7 +3,7 @@ default:
 
 run:
   docker build --tag 'coa-smolagents' .
-  docker run -p 7860:7860 'coa-smolagents'
+  docker run --network host -p 7860:7860 'coa-smolagents'
 
 test:
   uv run pytest --tb=short -q --disable-warnings

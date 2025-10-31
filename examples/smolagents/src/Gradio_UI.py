@@ -18,7 +18,10 @@ import os
 import re
 import shutil
 
+from datetime import datetime
 from typing import Optional
+
+from coa_dev_coagent import CoagentClient
 from smolagents.agent_types import AgentAudio, AgentImage, AgentText, handle_agent_output_types
 from smolagents.agents import ActionStep, MultiStepAgent
 from smolagents.memory import MemoryStep
@@ -183,6 +186,7 @@ class GradioUI:
             raise ModuleNotFoundError(
                 "Please install 'gradio' extra to use the GradioUI: `pip install 'smolagents[gradio]'`"
             )
+        self.coa = CoagentClient()
         self.agent = agent
         self.file_upload_folder = file_upload_folder
         if self.file_upload_folder is not None:
@@ -248,6 +252,15 @@ class GradioUI:
         return gr.Textbox(f"File uploaded: {file_path}", visible=True), file_uploads_log + [file_path]
 
     def log_user_message(self, text_input, file_uploads_log):
+        try:
+            run_id = f'smolagents-run-{datetime.now().astimezone().isoformat()}'
+            self.coa.log_run_start(
+                run_id=run_id,
+                prompt=text_input,
+            )
+        except Exception:
+            pass  # Ignore if CoagentClient is not properly initialized
+
         return (
             text_input
             + (

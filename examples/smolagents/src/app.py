@@ -5,7 +5,6 @@ from datetime import datetime
 from coa_dev_coagent import CoagentClient
 from dotenv import load_dotenv
 from smolagents import CodeAgent, OpenAIModel, MemoryStep, MultiStepAgent, ActionStep
-from smolagents.memory import FinalAnswerStep, PlanningStep, SystemPromptStep, TaskStep
 from Gradio_UI import GradioUI
 
 from tools.flight_search import FlightSearchTool
@@ -46,25 +45,8 @@ def logging_step_callback(
             except Exception as e:
                 print(f"Failed to log action step: {e}")
             return
-        case PlanningStep():
-            return
-        case TaskStep():
-            return
-        case SystemPromptStep():
-            return
-        case FinalAnswerStep():
-            return
         case _:
             print(f"[{agent.name}] {step}")
-
-# def final_answer_checks(*args, **kwargs):
-#     print(f"Final Answer: {args} -- {kwargs}")
-
-# def success_callback(*args, **kwargs):
-#     print(f"Success CB: {args} -- {kwargs}")
-
-# def failure_callback(*args, **kwargs):
-#     print(f"Failure CB: {args} -- {kwargs}")
 
 model = OpenAIModel(
     model_id=llm_model,
