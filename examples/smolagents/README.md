@@ -1,3 +1,5 @@
+# CoAgent + Smolagents Example
+
 In Smolagents, `step_callbacks` are functions that can be defined to execute
 specific actions or logging at each step of an agent's process. This feature
 allows developers to monitor the agent's progress and manage its behavior
