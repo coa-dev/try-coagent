@@ -1,0 +1,9 @@
+default:
+  just --list
+
+run:
+  docker build --tag 'coa-smolagents' .
+  docker run --network host 'coa-smolagents'
+
+test:
+  uv run pytest --tb=short -q --disable-warnings

@@ -1,2 +1,7 @@
 .volumes
 coagent_demo_storage/
+.env
+.venv
+.ropeproject
+__pycache__/
+.DS_Store
