@@ -86,6 +86,11 @@ docker-compose up
 IMAGE_TAG='v0.4' docker-compose up
 ```
 
+## Integration Examples
+
+- [LangChain](https://github.com/coa-dev/try-coagent/tree/main/examples/langchain-simple)
+- [Smolagents](https://github.com/coa-dev/try-coagent/tree/main/examples/smolagents)
+
 ## Troubleshooting
 
 ### Services won't start
