@@ -3,6 +3,16 @@ from google.adk.agents.callback_context import CallbackContext
 from google.adk.models.llm_request import LlmRequest
 from google.adk.plugins.base_plugin import BasePlugin
 
+def coa_before_agent_callback(
+    *, agent: BaseAgent, callback_context: CallbackContext
+) -> None:
+    print(f"[Plugin] Before agent callback for agent: {agent.name}")
+
+def coa_before_model_callback(
+    *, callback_context: CallbackContext, llm_request: LlmRequest
+) -> None:
+    print(f"[Plugin] Before model callback for model: {llm_request.model}")
+
 class CoaPlugin(BasePlugin):
   """CoAgent + ADK Agent Lifecycle Callback Integration."""
 
@@ -16,13 +26,9 @@ class CoaPlugin(BasePlugin):
   async def before_agent_callback(
       self, *, agent: BaseAgent, callback_context: CallbackContext
   ) -> None:
-    """Count agent runs."""
-    self.agent_count += 1
-    print(f"[Plugin] Agent run count: {self.agent_count}")
+      coa_before_agent_callback(agent, callback_context)
 
   async def before_model_callback(
       self, *, callback_context: CallbackContext, llm_request: LlmRequest
   ) -> None:
-    """Count LLM requests."""
-    self.llm_request_count += 1
-    print(f"[Plugin] LLM request count: {self.llm_request_count}")
+      coa_before_model_callback(callback_context, llm_request)

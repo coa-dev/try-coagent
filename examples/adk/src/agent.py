@@ -6,7 +6,7 @@ from google.adk.tools.agent_tool import AgentTool
 
 from . import prompt
 from .config import get_litellm_model
-from .coa_plugin import CoaPlugin
+from .coa_plugin import coa_before_agent_callback
 from .sub_agents.data_analyst import data_analyst_agent
 from .sub_agents.execution_analyst import execution_analyst_agent
 from .sub_agents.risk_analyst import risk_analyst_agent
@@ -33,6 +33,7 @@ def get_root_agent() -> LlmAgent:
             AgentTool(agent=execution_analyst_agent),
             AgentTool(agent=risk_analyst_agent),
         ],
+        after_agent_callback=coa_before_agent_callback,
     )
 
 root_agent = get_root_agent()
