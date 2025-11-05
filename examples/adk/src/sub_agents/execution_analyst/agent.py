@@ -3,11 +3,10 @@
 from google.adk import Agent
 
 from . import prompt
-
-MODEL = "gemini-2.5-pro"
+from src.config import get_litellm_model
 
 execution_analyst_agent = Agent(
-    model=MODEL,
+    model=get_litellm_model(),
     name="execution_analyst_agent",
     instruction=prompt.EXECUTION_ANALYST_PROMPT,
     output_key="execution_plan_output",

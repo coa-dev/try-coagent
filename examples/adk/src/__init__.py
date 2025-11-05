@@ -4,18 +4,16 @@ from google.adk.agents import LlmAgent
 from google.adk.tools.agent_tool import AgentTool
 
 from . import prompt
+from .config import get_litellm_model
 from .sub_agents.data_analyst import data_analyst_agent
 from .sub_agents.execution_analyst import execution_analyst_agent
 from .sub_agents.risk_analyst import risk_analyst_agent
 from .sub_agents.trading_analyst import trading_analyst_agent
 
 
-MODEL = "gemini-2.5-pro"
-
-
 financial_coordinator = LlmAgent(
     name="financial_coordinator",
-    model=MODEL,
+    model=get_litellm_model(),
     description=(
         "guide users through a structured process to receive financial "
         "advice by orchestrating a series of expert subagents. help them "
