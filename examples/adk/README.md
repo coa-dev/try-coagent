@@ -23,3 +23,10 @@ adk run src
 ```bash
 adk web --port 8000
 ```
+
+## Approach
+
+To monitor ADK, the CoAgentADKPlugin is provided taking advantage of ADK's plugin system
+which allows us to intercept Agent Lifecycle events and send them to CoAgent.
+
+Read more here: https://google.github.io/adk-docs/plugins/
