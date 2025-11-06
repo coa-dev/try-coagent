@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 from google.adk.agents import LlmAgent
 from google.adk.tools.agent_tool import AgentTool
 
+from agent import root_agent
+
 from . import prompt
 from .config import get_litellm_model
 from .coa_plugin import coa_before_agent_callback
@@ -11,7 +13,6 @@ from .sub_agents.data_analyst import data_analyst_agent
 from .sub_agents.execution_analyst import execution_analyst_agent
 from .sub_agents.risk_analyst import risk_analyst_agent
 from .sub_agents.trading_analyst import trading_analyst_agent
-from src import root_agent
 
 load_dotenv()
 

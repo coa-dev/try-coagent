@@ -2,8 +2,9 @@
 
 from google.adk import Agent
 
+from agent.config import get_litellm_model
+
 from . import prompt
-from src.config import get_litellm_model
 
 MODEL="gemini-2.5-pro"
 

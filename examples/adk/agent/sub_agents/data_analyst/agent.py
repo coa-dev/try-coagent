@@ -3,8 +3,9 @@
 from google.adk import Agent
 from google.adk.tools import google_search
 
+from agent.config import get_litellm_model
+
 from . import prompt
-from src.config import get_litellm_model
 
 data_analyst_agent = Agent(
     model=get_litellm_model(),
