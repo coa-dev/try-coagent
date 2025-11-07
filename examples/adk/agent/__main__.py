@@ -1,6 +1,8 @@
 import asyncio
 import aioconsole
 
+from coa_dev_coagent import CoagentClient
+from datetime import datetime
 from google.adk.runners import InMemoryRunner
 from google.genai.types import Content, Part
 
@@ -12,10 +14,14 @@ APP_NAME = 'financial_coordinator'
 USER_ID = 'coa_user'
 
 async def main():
+    coa = CoagentClient()
+    prompt_number = 1
+    turn_number = 1
+
     runner = InMemoryRunner(
         agent=get_root_agent(),
         app_name=APP_NAME,
-        plugins=[CoaPlugin()],
+        plugins=[CoaPlugin(coa=coa)],
     )
 
     print("Starting interactive session with the Financial Coordinator agent.")
@@ -29,6 +35,22 @@ async def main():
 
     while True:
         user_query = await aioconsole.ainput('[user]: ')
+
+        if prompt_number == 1 and turn_number == 1:
+            coa.log_session_start(
+                session_id=session.id,
+                prompt=user_query,
+                prompt_number=prompt_number,
+                turn_number=turn_number,
+            )
+            prompt_number += 1
+            turn_number += 1
+
+        run_id = f'adk-run-{datetime.now().astimezone().isoformat()}'
+        coa.log_run_start(
+            run_id=run_id,
+            prompt=user_query,
+        )
 
         print(f"[debug] User query received: {user_query}")
 
