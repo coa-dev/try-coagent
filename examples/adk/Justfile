@@ -1,0 +1,6 @@
+default:
+  just --list
+
+run:
+  docker build --tag 'coa-adk' .
+  docker run --network host -it 'coa-adk'

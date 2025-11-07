@@ -1,0 +1,7 @@
+[project]
+name = "adk_example"
+version = "0.1.0"
+description = "ADK + CoAgent example"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
