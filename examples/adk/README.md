@@ -44,3 +44,5 @@ We are running a Python script that creates the agent and runs it:
 ```bash
 uv run python3 -m agent
 ```
+
+Logic for the `CoagentPlugin` is available in `examples/adk/agent/coa_plugin.py`.
