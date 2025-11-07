@@ -4,12 +4,12 @@ from google.adk.models.llm_request import LlmRequest
 from google.adk.plugins.base_plugin import BasePlugin
 
 def coa_before_agent_callback(
-    *, agent: BaseAgent, callback_context: CallbackContext
+    agent: BaseAgent, callback_context: CallbackContext
 ) -> None:
     print(f"[Plugin] Before agent callback for agent: {agent.name}")
 
 def coa_before_model_callback(
-    *, callback_context: CallbackContext, llm_request: LlmRequest
+    callback_context: CallbackContext, llm_request: LlmRequest
 ) -> None:
     print(f"[Plugin] Before model callback for model: {llm_request.model}")
 
@@ -18,7 +18,8 @@ class CoaPlugin(BasePlugin):
 
   def __init__(self) -> None:
     """Initialize the plugin with counters."""
-    super().__init__(name="count_invocation")
+    print("Initializing CoaPlugin...")
+    super().__init__(name="coa_plugin")
     self.agent_count: int = 0
     self.tool_count: int = 0
     self.llm_request_count: int = 0

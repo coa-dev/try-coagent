@@ -15,4 +15,4 @@ EXPOSE 8000
 
 WORKDIR /app
 
-CMD adk web --port 8000
+CMD uv run python3 -m agent
