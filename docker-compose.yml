@@ -27,6 +27,8 @@ services:
     depends_on:
       clickhouse:
         condition: service_healthy
+      postgres:
+        condition: service_healthy
     pull_policy: if_not_present
 
   clickhouse:
@@ -80,6 +82,24 @@ services:
     profiles:
       - local-llm
     entrypoint: [ "/bin/bash", "-c", "ollama serve & sleep 5 && ollama pull all-minilm && ollama pull qwen3:4b && wait" ]
+
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "coagent"
+      POSTGRES_PASSWORD: "coagent"
+      POSTGRES_DB: "coagent"
+    volumes:
+      - .volumes/postgres/data:/var/lib/postgresql/data:z
+      - ./config/postgres/initdb.d:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U coagent -d coagent" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
 
 volumes:
   ollama_storage:
