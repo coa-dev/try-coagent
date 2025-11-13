@@ -83,7 +83,7 @@ docker-compose pull
 docker-compose up
 
 # Use specific version
-IMAGE_TAG='v0.4' docker-compose up
+IMAGE_TAG='v0.7' docker-compose up
 ```
 
 ## Integration Examples
