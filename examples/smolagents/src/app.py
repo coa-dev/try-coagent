@@ -5,6 +5,7 @@ from smolagents import CodeAgent, OpenAIModel, MemoryStep, MultiStepAgent, Actio
 from Gradio_UI import GradioUI
 
 from coa_dev_coagent import CoagentClient
+from coa_dev_coagent.logapi import create_tool_call_log, create_tool_response_log
 
 from tools.flight_search import FlightSearchTool
 from tools.final_answer import FinalAnswerTool
@@ -30,24 +31,87 @@ def logging_step_callback(
     match step:
         case ActionStep():
             try:
+                # Lock counters for this step so multiple logs share the same numbers
+                pn = get_prompt_number(True)
+                tn = get_turn_number(True)
+
                 if step.error is not None:
                     client.log_error(
                         session_id=get_session_id(),
-                        prompt_number=get_prompt_number(True),
-                        turn_number=get_turn_number(True),
+                        prompt_number=pn,
+                        turn_number=tn,
                         error_message=str(step.error),
                     )
 
                 if step.model_output:
+                    # Safely extract token usage if available
+                    input_tokens = getattr(step.token_usage, "input_tokens", None)
+                    output_tokens = getattr(step.token_usage, "output_tokens", None)
+                    total_tokens = getattr(step.token_usage, "total_tokens", None)
                     client.log_llm_response(
                         session_id=get_session_id(),
                         response=step.model_output,
-                        prompt_number=get_prompt_number(True),
-                        turn_number=get_turn_number(True),
-                        total_tokens=step.token_usage.total_tokens,
-                        input_tokens=step.token_usage.input_tokens,
-                        output_tokens=step.token_usage.output_tokens,
+                        prompt_number=pn,
+                        turn_number=tn,
+                        total_tokens=total_tokens,
+                        input_tokens=input_tokens,
+                        output_tokens=output_tokens,
                     )
+
+                # Log each tool call (if any)
+                if step.tool_calls and create_tool_call_log is not None:
+                    for tc in step.tool_calls:
+                        try:
+                            client.store_log(
+                                create_tool_call_log(
+                                    session_id=get_session_id(),
+                                    prompt_number=pn,
+                                    turn_number=tn,
+                                    tool_name=tc.name,
+                                    parameters=tc.arguments,
+                                )
+                            )
+                        except Exception as e:
+                            print(f"Failed to log tool call {getattr(tc, 'name', 'unknown')}: {e}")
+
+                # Log tool response using observations/action_output if present
+                if (step.observations is not None or step.action_output is not None):
+                    # Prefer action_output as structured result; include observations text if available
+                    result_payload = {}
+                    if step.action_output is not None:
+                        result_payload["action_output"] = step.action_output
+                    if step.observations is not None:
+                        result_payload["observations"] = step.observations
+
+                    # Best-effort tool_name/parameters from the first tool call (if any)
+                    first_tool_name = None
+                    first_params = None
+                    if step.tool_calls:
+                        first_tool_name = step.tool_calls[0].name
+                        first_params = step.tool_calls[0].arguments
+
+                    exec_time_ms = None
+                    try:
+                        exec_time_ms = int(step.timing.duration()) if step.timing else None
+                    except Exception:
+                        exec_time_ms = None
+
+                    try:
+                        client.store_log(
+                            create_tool_response_log(
+                                session_id=get_session_id(),
+                                prompt_number=pn,
+                                turn_number=tn,
+                                tool_name=first_tool_name,
+                                parameters=first_params,
+                                result=result_payload,
+                                success=step.error is None,
+                                error_message=str(step.error) if step.error else None,
+                                execution_time_ms=exec_time_ms,
+                            )
+                        )
+                    except Exception as e:
+                        print(f"Failed to log tool response: {e}")
 
                 if step.is_final_answer:
                     client.log_run_end(
