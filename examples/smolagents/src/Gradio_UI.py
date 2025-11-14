@@ -197,6 +197,17 @@ class GradioUI:
     def interact_with_agent(self, prompt, messages):
         import gradio as gr
 
+        # Log user input to CoAgent
+        try:
+            self.coa.log_user_input(
+                session_id=get_session_id(),
+                prompt=prompt,
+                prompt_number=get_prompt_number(False),
+                turn_number=get_turn_number(False),
+            )
+        except Exception as e:
+            print(f"Failed to log user input: {e}")
+
         messages.append(gr.ChatMessage(role="user", content=prompt))
         yield messages
         for msg in stream_to_gradio(self.agent, task=prompt, reset_agent_memory=False):
