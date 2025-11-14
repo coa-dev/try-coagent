@@ -90,9 +90,13 @@ def logging_step_callback(
                         first_tool_name = step.tool_calls[0].name
                         first_params = step.tool_calls[0].arguments
 
+                    # Compute execution time (ms). In Smolagents, duration is a value, not a callable.
                     exec_time_ms = None
                     try:
-                        exec_time_ms = int(step.timing.duration()) if step.timing else None
+                        if step.timing is not None and getattr(step.timing, "duration", None) is not None:
+                            duration_val = step.timing.duration  # typically seconds as float
+                            # Convert seconds -> milliseconds
+                            exec_time_ms = int(duration_val * 1000)
                     except Exception:
                         exec_time_ms = None
 
@@ -114,10 +118,18 @@ def logging_step_callback(
                         print(f"Failed to log tool response: {e}")
 
                 if step.is_final_answer:
+                    # Use the same execution timing for the final log if available
+                    final_elapsed_ms = exec_time_ms
+                    if final_elapsed_ms is None and step.timing is not None and getattr(step.timing, "duration", None) is not None:
+                        try:
+                            final_elapsed_ms = int(step.timing.duration * 1000)
+                        except Exception:
+                            final_elapsed_ms = None
+
                     client.log_run_end(
                         run_id=f'run-{get_session_id()}',
                         response=step.model_output,
-                        elapsed_msec=step.timing.duration(),
+                        elapsed_msec=final_elapsed_ms,
                     )
             except Exception as e:
                 print(f"Failed to log action step: {e}")
