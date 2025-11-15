@@ -1,4 +1,5 @@
 import os
+import json
 
 from dotenv import load_dotenv
 from smolagents import CodeAgent, OpenAIModel, MemoryStep, MultiStepAgent, ActionStep
@@ -30,6 +31,34 @@ def logging_step_callback(
 ):
     match step:
         case ActionStep():
+            # Log raw LLM call early (prompt + model output) if we have input messages
+            if step.model_input_messages:
+                try:
+                    # Original simple join approach, but use render_as_markdown when available.
+                    prompt = "\n".join(
+                        (
+                            msg.render_as_markdown()  # preferred rich text
+                            if hasattr(msg, "render_as_markdown")
+                            else str(getattr(msg, "content", ""))
+                        )
+                        for msg in step.model_input_messages
+                        if hasattr(msg, "content") or hasattr(msg, "render_as_markdown")
+                    )
+                    client.log_llm_call(
+                        run_id=get_session_id(),
+                        context_name=agent.name,
+                        prompt=prompt,
+                        response=step.model_output if step.model_output else "",
+                        purpose="step_generation",
+                        meta={
+                            "step_number": step.step_number,
+                            "tool_calls": [tc.name for tc in step.tool_calls] if step.tool_calls else [],
+                            "is_final_answer": step.is_final_answer,
+                        },
+                    )
+                except Exception as e:
+                    print(f"Failed to log LLM call: {e}")
+
             try:
                 # Lock counters for this step so multiple logs share the same numbers
                 pn = get_prompt_number(True)
@@ -44,7 +73,6 @@ def logging_step_callback(
                     )
 
                 if step.model_output:
-                    # Safely extract token usage if available
                     input_tokens = getattr(step.token_usage, "input_tokens", None)
                     output_tokens = getattr(step.token_usage, "output_tokens", None)
                     total_tokens = getattr(step.token_usage, "total_tokens", None)
@@ -58,7 +86,6 @@ def logging_step_callback(
                         output_tokens=output_tokens,
                     )
 
-                # Log each tool call (if any)
                 if step.tool_calls and create_tool_call_log is not None:
                     for tc in step.tool_calls:
                         try:
@@ -74,29 +101,23 @@ def logging_step_callback(
                         except Exception as e:
                             print(f"Failed to log tool call {getattr(tc, 'name', 'unknown')}: {e}")
 
-                # Log tool response using observations/action_output if present
                 if (step.observations is not None or step.action_output is not None):
-                    # Prefer action_output as structured result; include observations text if available
                     result_payload = {}
                     if step.action_output is not None:
                         result_payload["action_output"] = step.action_output
                     if step.observations is not None:
                         result_payload["observations"] = step.observations
 
-                    # Best-effort tool_name/parameters from the first tool call (if any)
                     first_tool_name = None
                     first_params = None
                     if step.tool_calls:
                         first_tool_name = step.tool_calls[0].name
                         first_params = step.tool_calls[0].arguments
 
-                    # Compute execution time (ms). In Smolagents, duration is a value, not a callable.
                     exec_time_ms = None
                     try:
                         if step.timing is not None and getattr(step.timing, "duration", None) is not None:
-                            duration_val = step.timing.duration  # typically seconds as float
-                            # Convert seconds -> milliseconds
-                            exec_time_ms = int(duration_val * 1000)
+                            exec_time_ms = int(step.timing.duration * 1000)
                     except Exception:
                         exec_time_ms = None
 
@@ -118,13 +139,12 @@ def logging_step_callback(
                         print(f"Failed to log tool response: {e}")
 
                 if step.is_final_answer:
-                    # Use the same execution timing for the final log if available
-                    final_elapsed_ms = exec_time_ms
-                    if final_elapsed_ms is None and step.timing is not None and getattr(step.timing, "duration", None) is not None:
-                        try:
+                    final_elapsed_ms = None
+                    try:
+                        if step.timing is not None and getattr(step.timing, "duration", None) is not None:
                             final_elapsed_ms = int(step.timing.duration * 1000)
-                        except Exception:
-                            final_elapsed_ms = None
+                    except Exception:
+                        final_elapsed_ms = None
 
                     client.log_session_end(
                         session_id=get_session_id(),
