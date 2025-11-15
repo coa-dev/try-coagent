@@ -126,10 +126,12 @@ def logging_step_callback(
                         except Exception:
                             final_elapsed_ms = None
 
-                    client.log_run_end(
-                        run_id=f'run-{get_session_id()}',
+                    client.log_session_end(
+                        session_id=get_session_id(),
                         response=step.model_output,
-                        elapsed_msec=final_elapsed_ms,
+                        prompt_number=pn,
+                        turn_number=tn,
+                        elapsed_time_ms=final_elapsed_ms,
                     )
             except Exception as e:
                 print(f"Failed to log action step: {e}")
