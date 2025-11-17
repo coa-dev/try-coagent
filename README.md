@@ -86,10 +86,15 @@ docker-compose up
 IMAGE_TAG='v0.7.3' docker-compose up
 ```
 
-## Integration Examples
+## Learning Resources
 
-- [LangChain](https://github.com/coa-dev/try-coagent/tree/main/examples/langchain-simple)
-- [Smolagents](https://github.com/coa-dev/try-coagent/tree/main/examples/smolagents)
+### Interactive Tutorial
+- **[Logging API Tutorial](examples/logging-api-tutorial.hurl)** - Hands-on, executable tutorial teaching the complete Logging API through real examples. Run with [Hurl](https://hurl.dev/) to learn interactively.
+
+### Integration Examples
+- **[LangChain](https://github.com/coa-dev/try-coagent/tree/main/examples/langchain-simple)** - Integrate CoAgent with LangChain agents
+- **[Smolagents](https://github.com/coa-dev/try-coagent/tree/main/examples/smolagents)** - Integrate CoAgent with HuggingFace Smolagents
+- **[ADK](https://github.com/coa-dev/try-coagent/tree/main/examples/adk)** - Build agents with CoAgent's native framework
 
 ## Troubleshooting
 
@@ -110,8 +115,13 @@ docker-compose up
 
 ## Documentation
 
-For detailed information on integrating CoAgent with your Python AI agents:
-- [Event Logging Reference](docs/reference.md) - Complete guide to logging agent events, monitoring performance, and tracking behavior
+### Getting Started
+- **[Logging API Tutorial](examples/logging-api-tutorial.hurl)** - Interactive HTTP API tutorial - best way to learn the logging API regardless of which language/client you'll use
+- **[Event Logging Reference](docs/reference.md)** - Complete API reference for logging agent events, monitoring performance, and tracking behavior
+
+### Client Libraries
+- **Python Client** - Use the `coagent` Python package for easy integration (see examples above)
+- **Direct HTTP API** - Call the REST API directly from any language (see the Hurl tutorial for examples)
 
 ## Support
 
