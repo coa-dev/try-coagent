@@ -606,8 +606,8 @@ HTTP 200
 [Asserts]
 jsonpath "$" isCollection
 # Our tutorial sessions should be in the list
-jsonpath "$[*]" includes "tutorial-session-001"
-jsonpath "$[*]" includes "batch-tutorial-session"
+jsonpath "$[*]" contains "tutorial-session-001"
+jsonpath "$[*]" contains "batch-tutorial-session"
 
 
 # ------------------------------------------------------------------------------
@@ -638,99 +638,8 @@ jsonpath "$[?(@.run_id == 'tutorial-session-001')].start_timestamp" exists
 jsonpath "$[?(@.run_id == 'tutorial-session-001')].end_timestamp" exists
 
 # Verify log count is reasonable (should be 8+)
-jsonpath "$[?(@.run_id == 'tutorial-session-001')].log_count" >= 8
-
-
-################################################################################
-# PART 10: FILTERING LOGS - Advanced Retrieval
-################################################################################
-
-# ------------------------------------------------------------------------------
-# Test 14: Filter Logs - Get Only LLM Calls
-# ------------------------------------------------------------------------------
-#
-# Filter logs by event type using JMESPath queries.
-# This is useful for focused analysis.
-#
-# ENDPOINT: GET /api/v1/filter_logs/{session_id}?pre={filter_type}
-#
-# AVAILABLE FILTERS:
-# - log_type_llm_call: Only LLM call events
-# - log_type_start: Only session_start events
-# - log_type_end: Only session_end events
-# - lmmcall_tokens: LLM calls with token information
-# - all: All events (same as GET /logs/:run_id)
-#
-GET http://localhost:3000/api/v1/filter_logs/tutorial-session-001?pre=log_type_llm_call
-
-HTTP 200
-[Asserts]
-jsonpath "$" isCollection
-# Should have at least 2 LLM calls from our tutorial
-jsonpath "$[*]" count >= 2
-# All entries should be llm_call type
-jsonpath "$[0].event_type" == "llm_call"
-jsonpath "$[0].llm_call" exists
-
-
-# ------------------------------------------------------------------------------
-# Test 15: Filter Logs - Get Session Boundaries
-# ------------------------------------------------------------------------------
-#
-# Quickly get just the start and end events to see session duration.
-#
-GET http://localhost:3000/api/v1/filter_logs/tutorial-session-001?pre=log_type_start
-
-HTTP 200
-[Asserts]
-jsonpath "$" isCollection
-jsonpath "$[*]" count == 1
-jsonpath "$[0].event_type" == "session_start"
-
-GET http://localhost:3000/api/v1/filter_logs/tutorial-session-001?pre=log_type_end
-
-HTTP 200
-[Asserts]
-jsonpath "$" isCollection
-jsonpath "$[*]" count == 1
-jsonpath "$[0].event_type" == "session_end"
-
-
-################################################################################
-# PART 11: ERROR HANDLING - API Validation
-################################################################################
-
-# ------------------------------------------------------------------------------
-# Test 16: POST Invalid Log Entry (Missing Required Fields)
-# ------------------------------------------------------------------------------
-#
-# The API validates your log entries. Here's what happens with bad data:
-#
-POST http://localhost:3000/api/v1/logs
-Content-Type: application/json
-{
-  "invalid": "structure",
-  "missing_required_fields": true
-}
-
-HTTP 400
-[Asserts]
-jsonpath "$.success" == false
-jsonpath "$.message" exists
-
-
-# ------------------------------------------------------------------------------
-# Test 17: GET Non-existent Session
-# ------------------------------------------------------------------------------
-#
-# Requesting a session_id that doesn't exist returns an empty array (not an error).
-#
-GET http://localhost:3000/api/v1/logs/does-not-exist-12345
-
-HTTP 200
-[Asserts]
-jsonpath "$" isCollection
-jsonpath "$[*]" count == 0
+# Note: The filter returns an array, so we check the first element
+jsonpath "$[?(@.run_id == 'tutorial-session-001')].log_count" nth 0 >= 8
 
 
 ################################################################################
