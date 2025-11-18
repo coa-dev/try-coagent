@@ -36,22 +36,6 @@ async def main():
     while True:
         user_query = await aioconsole.ainput('[user]: ')
 
-        if prompt_number == 1 and turn_number == 1:
-            coa.log_session_start(
-                session_id=session.id,
-                prompt=user_query,
-                prompt_number=prompt_number,
-                turn_number=turn_number,
-            )
-            prompt_number += 1
-            turn_number += 1
-
-        run_id = f'adk-run-{datetime.now().astimezone().isoformat()}'
-        coa.log_run_start(
-            run_id=run_id,
-            prompt=user_query,
-        )
-
         print(f"[debug] User query received: {user_query}")
 
         if user_query.lower() in ['exit', 'quit']:
