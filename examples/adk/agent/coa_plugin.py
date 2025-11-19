@@ -203,8 +203,6 @@ class CoaPlugin(BasePlugin):
             session_id = tool_context.session.id
 
             tool_name = tool.name
-
-
             pn = self._get_prompt_number(session_id)
             tn = self._get_turn_number(session_id)
 
