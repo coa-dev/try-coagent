@@ -44,17 +44,12 @@ def logging_step_callback(
                         for msg in step.model_input_messages
                         if hasattr(msg, "content") or hasattr(msg, "render_as_markdown")
                     )
-                    client.log_llm_call(
-                        run_id=get_session_id(),
-                        context_name=agent.name,
+                    client.log_llm_call_new(
+                        session_id=get_session_id(),
+                        issuer=agent.name,
                         prompt=prompt,
-                        response=step.model_output if step.model_output else "",
-                        purpose="step_generation",
-                        meta={
-                            "step_number": step.step_number,
-                            "tool_calls": [tc.name for tc in step.tool_calls] if step.tool_calls else [],
-                            "is_final_answer": step.is_final_answer,
-                        },
+                        prompt_number=get_prompt_number(False),
+                        turn_number=get_turn_number(False),
                     )
                 except Exception as e:
                     print(f"Failed to log LLM call: {e}")

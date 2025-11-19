@@ -275,12 +275,6 @@ class GradioUI:
                     prompt_number=prompt_number,
                     turn_number=turn_number,
                 )
-            else:
-                run_id = f'smolagents-run-{datetime.now().astimezone().isoformat()}'
-                self.coa.log_run_start(
-                    run_id=run_id,
-                    prompt=text_input,
-                )
         except Exception:
             pass  # Ignore if CoagentClient is not properly initialized
 
