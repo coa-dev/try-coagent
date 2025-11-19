@@ -134,6 +134,7 @@ class CoaPlugin(BasePlugin):
     ) -> None:
         """Callback executed before a tool is called. Logs the tool call when possible."""
         try:
+            print(f"[Plugin] Before tool callback for tool: {tool.name}")
             session_id = tool_context.session.id
 
             tool_name = tool.name
@@ -164,6 +165,7 @@ class CoaPlugin(BasePlugin):
     ) -> None:
         """Callback executed after a tool is called. Logs the tool response when possible."""
         try:
+            print(f"[Plugin] After tool callback for tool: {tool.name}")
             session_id = tool_context.session.id
 
             tool_name = tool.name

@@ -23,5 +23,6 @@ def get_litellm_model() -> LiteLlm:
     return LiteLlm(
         model=get_llm_model(),
         api_key=get_llm_api_key(),
-        api_base=get_llm_api_base()
+        api_base=get_llm_api_base(),
+        custom_llm_provider="gemini"
     )
