@@ -222,8 +222,8 @@ class CoaPlugin(BasePlugin):
                     )
                 )
 
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[Plugin] Error in on_tool_error_callback: {e}")
         return None
 
     async def on_error_callback(
