@@ -2,14 +2,14 @@
 
 from google.adk import Agent
 
-from agent.config import get_litellm_model
+from agent.config import get_gemini_model
 
 from . import prompt
 
 MODEL="gemini-2.5-pro"
 
 risk_analyst_agent = Agent(
-    model=get_litellm_model(),
+    model=get_gemini_model(),
     name="risk_analyst_agent",
     instruction=prompt.RISK_ANALYST_PROMPT,
     output_key="final_risk_assessment_output",

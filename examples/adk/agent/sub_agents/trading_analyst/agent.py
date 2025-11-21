@@ -4,10 +4,10 @@ from google.adk import Agent
 
 from . import prompt
 
-MODEL="gemini-2.5-pro"
+from agent.config import get_gemini_model
 
 trading_analyst_agent = Agent(
-    model=MODEL,
+    model=get_gemini_model(),
     name="trading_analyst_agent",
     instruction=prompt.TRADING_ANALYST_PROMPT,
     output_key="proposed_trading_strategies_output",

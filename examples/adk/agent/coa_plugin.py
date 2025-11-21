@@ -3,12 +3,19 @@ import time
 from typing import Any
 
 from coa_dev_coagent import CoagentClient
+from coa_dev_coagent.logapi import (
+    create_tool_call_log,
+    create_tool_response_log,
+)
+
 from google.adk.agents.base_agent import BaseAgent
 from google.adk.agents.callback_context import CallbackContext
 from google.adk.agents.invocation_context import InvocationContext
 from google.adk.models.llm_request import LlmRequest
-from google.adk.plugins.base_plugin import BasePlugin
 from google.adk.models import LlmResponse
+from google.adk.plugins.base_plugin import BasePlugin
+from google.adk.tools.base_tool import BaseTool
+from google.adk.tools.tool_context import ToolContext
 
 class CoaPlugin(BasePlugin):
     """CoAgent + ADK Agent Lifecycle Callback Integration."""
@@ -117,6 +124,105 @@ class CoaPlugin(BasePlugin):
         except Exception as e:
             print(f"[Plugin] Error in after_model_callback: {e}")
             await self._log_error(session, f"after_model_callback error: {e}")
+
+    async def before_tool_callback(
+        self,
+        *,
+        tool: BaseTool,
+        tool_args: dict[str, Any],
+        tool_context: ToolContext,
+    ) -> None:
+        """Callback executed before a tool is called. Logs the tool call when possible."""
+        try:
+            print(f"[Plugin] Before tool callback for tool: {tool.name}")
+            session_id = tool_context.session.id
+
+            tool_name = tool.name
+            pn = self._get_prompt_number(session_id)
+            tn = self._get_turn_number(session_id)
+
+            self.client.store_log(
+                create_tool_call_log(
+                    session_id=session_id,
+                    prompt_number=pn,
+                    turn_number=tn,
+                    tool_name=tool_name,
+                    parameters=tool_args,
+                    )
+                )
+        except Exception:
+            # Swallow logging errors; do not affect tool execution
+            pass
+        return None
+
+    async def after_tool_callback(
+        self,
+        *,
+        tool: BaseTool,
+        tool_args: dict[str, Any],
+        tool_context: ToolContext,
+        result: dict,
+    ) -> None:
+        """Callback executed after a tool is called. Logs the tool response when possible."""
+        try:
+            print(f"[Plugin] After tool callback for tool: {tool.name}")
+            session_id = tool_context.session.id
+
+            tool_name = tool.name
+
+            pn = self._get_prompt_number(session_id)
+            tn = self._get_turn_number(session_id)
+
+            self.client.store_log(
+                create_tool_response_log(
+                    session_id=session_id,
+                    prompt_number=pn,
+                    turn_number=tn,
+                    tool_name=tool_name,
+                    parameters=tool_args,
+                    result=result,
+                    success=True,
+                    error_message=None,
+                    execution_time_ms=None,
+                    )
+                )
+        except Exception as e:
+            print(f"[Plugin] Error in after_tool_callback: {e}")
+        return None
+
+    async def on_tool_error_callback(
+        self,
+        *,
+        tool: BaseTool,
+        tool_args: dict[str, Any],
+        tool_context: ToolContext,
+        error: Exception,
+    ) -> None:
+        """Callback executed when a tool call errors. Logs error details."""
+        try:
+            session_id = tool_context.session.id
+
+            tool_name = tool.name
+            pn = self._get_prompt_number(session_id)
+            tn = self._get_turn_number(session_id)
+
+            self.client.store_log(
+                create_tool_response_log(
+                    session_id=session_id,
+                    prompt_number=pn,
+                    turn_number=tn,
+                    tool_name=tool_name,
+                    parameters=tool_args,
+                    result=None,
+                    success=False,
+                    error_message=str(error),
+                    execution_time_ms=None,
+                    )
+                )
+
+        except Exception as e:
+            print(f"[Plugin] Error in on_tool_error_callback: {e}")
+        return None
 
     async def on_error_callback(
         self, *, callback_context: CallbackContext, error: Exception
