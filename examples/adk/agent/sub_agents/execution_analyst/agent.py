@@ -2,12 +2,12 @@
 
 from google.adk import Agent
 
-from agent.config import get_litellm_model
+from agent.config import get_gemini_model
 
 from . import prompt
 
 execution_analyst_agent = Agent(
-    model=get_litellm_model(),
+    model=get_gemini_model(),
     name="execution_analyst_agent",
     instruction=prompt.EXECUTION_ANALYST_PROMPT,
     output_key="execution_plan_output",
