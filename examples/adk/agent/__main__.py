@@ -15,8 +15,6 @@ USER_ID = 'coa_user'
 
 async def main():
     coa = CoagentClient()
-    prompt_number = 1
-    turn_number = 1
 
     runner = InMemoryRunner(
         agent=get_root_agent(),
